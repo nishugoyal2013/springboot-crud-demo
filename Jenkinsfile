@@ -13,7 +13,7 @@ pipeline {
     stage('Run Pro') {
          steps {
             sh '''PATH=$PATH:/var/jenkins_home/tools/apache-maven-3.6.3/bin 
-            mvn clean package'''
+            mvn spring-boot:run'''
          }
       }
    }
