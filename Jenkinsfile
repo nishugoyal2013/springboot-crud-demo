@@ -9,7 +9,8 @@ pipeline {
 	    sh '''docker run -it --name crudsql --network=crudtest -e MYSQL_ROOT_PASSWORD=rg123 -e MYSQL_USER=root -e MYSQL__PASSWORD=rg123 -e MYSQL_DATABASE=springbootdb -d -p 3306:3306 mysql || true
 	    docker ps
 	    PATH=$PATH:/var/jenkins_home/tools/apache-maven-3.6.3/bin
-            mvn spring-boot:run'''
+            docker-compose up -d 
+	    '''
          }
       }
     stage('Run Pro') {
@@ -17,6 +18,10 @@ pipeline {
 	    echo "complete"
          }
       }
+    post { 
+        failure { 
+            sh 'docker image rm interim'
+        }	
    }
 }
 
