@@ -18,7 +18,8 @@ pipeline {
 	    echo "complete"
          }
       }
-    post { 
+   }
+   post { 
         failure { 
             sh 'docker image rm interim'
         }	
